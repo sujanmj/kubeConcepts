@@ -1,2 +1,2 @@
 # new-work
-ok
+6
