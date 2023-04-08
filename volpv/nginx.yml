@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: nginx
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+  
+    spec:
+      volumes:
+      - name: ebay-volume
+        persistentVolumeClaim:
+          claimName: myclaim
+
+      containers:
+      - name: container-nginx  
+        image: nginx
+        volumeMounts:
+        - name: ebay-volume
+          mountPath: "/tmp/persistent"

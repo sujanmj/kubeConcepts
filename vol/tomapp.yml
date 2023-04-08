@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: tomcat
+      environment: dev
+  template:
+    metadata:
+      labels:
+        app: tomcat
+        environment: dev
+    spec:
+      volumes:
+      - name: volume
+        hostPath:
+          path: /mnt/data
+
+      containers:
+      - name: container-tomcat
+        image: tomcat
+        volumeMounts:
+         - name: volume
+           mountPath: "/var/tomcat-data"
